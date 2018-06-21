@@ -7,7 +7,7 @@ You can use those tools independently and build your own framework or extend cur
 
 > Is extensible modular system on typescript for node.js
 
-[View more](https://github.com/typeix/modules)
+[View more](https://typeix.github.io/modules)
 
 * * *
 
@@ -15,7 +15,7 @@ You can use those tools independently and build your own framework or extend cur
 
 > Missing dependency injection on typescript for node.js
 
-[View more](https://github.com/typeix/di)
+[View more](https://typeix.github.io/di)
 
 * * *
 
@@ -23,6 +23,6 @@ You can use those tools independently and build your own framework or extend cur
 
 > Powerful routing on typescript for node.js
 
-[View more](https://github.com/typeix/router)
+[View more](https://typeix.github.io/router)
 
 * * *
