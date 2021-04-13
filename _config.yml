@@ -1,9 +1,9 @@
 name: Igor Ivanovic
-title: Typeix.org
+title: Typeix
 description: Set of typescript development tools for nodejs, designed for scaling up teams and making development easier.
 repository: https://github.com/typeix
 
-theme: jekyll-theme-architect
+remote_theme: aksakalli/jekyll-doc-theme@gh-pages   
 
 exclude:
   - .gitignore
