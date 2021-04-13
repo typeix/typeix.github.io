@@ -3,7 +3,7 @@ title: Typeix
 description: Set of typescript development tools for nodejs, designed for scaling up teams and making development easier.
 repository: https://github.com/typeix
 
-remote_theme: aksakalli/jekyll-doc-theme@gh-pages   
+theme: jekyll-theme-architect  
 
 exclude:
   - .gitignore
