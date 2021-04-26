@@ -1,34 +1,80 @@
-[data-md-color-scheme="slate"] {
-    background-color: black;
-}
-.md-bg{
-    background: url(/assets/bg.png) 70% 0 no-repeat transparent;
-    background-size: contain;
-}
-.md-bg-white{
-    background-color: white;
+.md-bg-theme {
+    background-color: var(--md-footer-bg-color);
+    color: var(--md-footer-fg-color);
 }
 .mdx-hero {
     margin-top: 20px;
     display: flex;
     align-items: stretch;
 }
-.mdx-hero__svg svg{
+
+.mdx-hero__svg svg {
     fill: white;
 }
+
 .mdx-hero__content {
-    max-width: 19rem;
+    max-width: 25rem;
     margin-top: 3.5rem;
     padding-bottom: 14vw;
 }
-.md-typeset h1{
+
+.mdx-hero__image {
+    order: 1;
+    margin-left: calc(50% - 600px);
+}
+
+.mdx-hero__image img {
+    width: 600px;
+}
+.md-badge-container {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    min-height: 300px;
+}
+.md-badges {
+    display: flex;
+    padding: 0;
+    max-width: 61rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+.md-badges .item {
+    list-style: none;
+    margin: 0 20px 0 20px;
+    text-align: center;
+
+}
+.md-badges .item .title {
+    font-size: 1rem;
+    margin: 20px 0 20px 0;
+    font-weight: bold;
+}
+.md-badges .item .intro {
+    font-size: 0.7rem;
+}
+
+.md-badges i svg {
+    width: 50px;
+    fill: var(--md-footer-fg-color--light);
+}
+
+.md-typeset h1 {
     color: white;
 }
+
 .md-preview {
     text-align: center;
+    padding: 50px 0 50px 0;
 }
+
 .md-preview h1 {
     margin: 0;
+    font-weight: bold;
+    font-size: 2rem;
+}
+.md-main {
+    display: none;
 }
 @media screen and (max-width: 60em) {
     .mdx-hero {

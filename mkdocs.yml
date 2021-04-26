@@ -2,8 +2,8 @@ site_name: Typeix
 site_url: https://typeix.com
 site_author: Igor Ivanovic
 site_description: >-
-  A progressive Node.js tools for building efficient and scalable applications
-extra_css: []
+  A progressive Node.js tools for building efficient and scalable applications and libraries.
+extra_css: [ ]
 # Repository
 repo_name: typeix
 repo_url: https://github.com/typeix/typeix
@@ -12,12 +12,23 @@ edit_uri: ""
 
 
 # Copyright
-copyright: Copyright &copy; 2017 - 2021 Igor Ivanovic
+copyright: Copyright &copy; 2016 - 2021 Igor Ivanovic
 
 home:
   intro_section:
     h1: Hello, Typeix!
-    description: A progressive Node.js framework for building efficient and scalable applications
+    description: Fast, unopinionated, minimalist framework for building efficient and scalable applications and libraries.
+  badges:
+    - title: EXTENSIBLE
+      description: Provides flexibility by allowing use core libraries in own projects.
+      icon: material/cogs
+    - title: VERSATILE
+      description: Adaptable ecosystem for all kinds of server-side applications or custom libraries.
+      icon: material/auto-fix
+    - title: LIGHTWEIGHT
+      description: "@typeix/resty is a minimal and flexible Node.js web application framework that provides a robust set of features."
+      icon: material/progress-wrench
+
   live_preview:
     h1: Live preview
     description: See how your application may potentially look.
@@ -109,8 +120,8 @@ markdown_extensions:
 # Page tree
 nav:
   - Home: index.md
-  - TBD: index.md
-  - TBD: index.md
+  - Getting Started: index.md
+  - Support: index.md
 
 # Google Analytics
 #google_analytics:

@@ -2,9 +2,12 @@
 {% extends "main.html" %}
 {% block tabs %}
 {{ super() }}
-<section class="mdx-container md-bg">
+<section class="mdx-container">
     <div class="md-grid md-typeset">
         <div class="mdx-hero">
+            <div class="mdx-hero__image">
+                <img src="/assets/coding.png" />
+            </div>
             <div class="mdx-hero__content">
                 <h1>{{ config.home.intro_section.h1 }}</h1>
                 <p>{{ config.home.intro_section.description }}</p>
@@ -19,6 +22,17 @@
             </div>
         </div>
     </div>
+</section>
+<section class="mdx-container md-bg-theme md-badge-container">
+    <ul class="md-badges">
+        {% for item in config.home.badges %}
+        <li class="item">
+            <i class="twemoji">{% include ".icons/"+ item.icon +".svg" %}</i>
+            <div class="title">{{ item.title }}</div>
+            <div class="intro">{{ item.description }}</div>
+        </li>
+        {% endfor %}
+    </ul>
 </section>
 <section class="mdx-container">
     <div class="md-grid md-typeset">
@@ -35,5 +49,6 @@
     </div>
 </section>
 {% endblock %}
-{% block content %}{% endblock %}
-{% block footer %}{% endblock %}
+{% block footer %}
+    {% include "partials/home-footer.html" %}
+{% endblock %}
