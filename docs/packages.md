@@ -20,13 +20,3 @@ Typeix today provide set of tools which can be used independently in projects or
 | `@typeix/logger`              | :material-check: Wrapper around pino logger library |
 | `@typeix/resty`               | :material-check: High level REST server implementation |
 | `@typeix/resty-aws-lambda`    | :material-check: One line AWS Lambda integration with resty server |
-
-## Consulting
-With official support, you can get expert help straight from Typeix core team. We provide dedicated technical support, migration strategies,
-advice on best practices (and design decisions), PR reviews, and team augmentation.
-
-
-## Stay in touch
-* Author - [Igor Ivanovic](https://twitter.com/igorzg1987)
-* Website - [https://typeix.com](https://typeix.com)
-* Twitter - [@typeixframework](https://twitter.com/typeixframework)

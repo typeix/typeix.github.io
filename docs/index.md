@@ -1,6 +1,6 @@
 ---
 template: home.html
-title: A progressive Node.js toolset
+title: A progressive Node.js framework
 ---
 
 

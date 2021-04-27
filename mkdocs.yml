@@ -2,7 +2,7 @@ site_name: Typeix
 site_url: https://typeix.com
 site_author: Igor Ivanovic
 site_description: >-
-  A progressive Node.js tools for building efficient and scalable applications and libraries.
+  A progressive Node.js framework for building efficient and scalable applications and libraries.
 extra_css: [ ]
 # Repository
 repo_name: typeix
@@ -127,7 +127,7 @@ nav:
       - Philosophy: packages.md
       - Metadata: packages/typeix-metadata.md
       - Dependency Injection: packages/typeix-di.md
-#      - "@typeix/modules": packages/typeix-modules.md
+      - Modules: packages/typeix-modules.md
 #      - "@typeix/utils": packages/typeix-utils.md
 #      - "@typeix/router": packages/typeix-router.md
 #      - "@typeix/logger": packages/typeix-logger.md
@@ -135,6 +135,6 @@ nav:
 #      - "@typeix/resty-aws-lambda": packages/typeix-resty-aws-lambda.md
 #  - Benchmarks: benchmarks.md
 # Google Analytics
-#google_analytics:
-#  - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
-#  - auto
+google_analytics:
+  - !!python/object/apply:os.getenv ["G-CRNY5PJKJH"]
+  - auto
