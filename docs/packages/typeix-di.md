@@ -110,17 +110,20 @@ interface IProvider {
 ```
 
 ## Injector API
+**NOTE:** <br/> By default all providers are immutable, however you can define mutable provider keys. <br />
+If provider is not mutable and you are trying to create new instance of same provider on current Injector instance, 
+injector will throw error.
+
+`Injector.getProviders(provider: IProvider, propertyKey?: string)` will return all providers which needs to be injected, 
+if propertyKey is not defined injector will return providers for constructor.
+
+`Injector.getAllMetadataForTarget(provider: IProvider)` will return all metadata, injector cache them internally.
+Works with class provider only.
+
 ```typescript
+
 class Injector {
-    /**
-     * 
-     * By default all providers are immutable, however you can define mutable 
-     * provider keys, if provider is not mutable and you are trying to create 
-     * new instance of same provider on current Injector instance, 
-     * injector will throw error.
-     */
-    constructor(_parent?: Injector, keys?: Array<any>); 
-    // retunrs all injectables for method
+    constructor(_parent?: Injector, keys?: Array<any>);
     static getProviders(provider: IProvider, propertyKey?: string): Array<IProvider>;
     // returns all metadata for provider
     static getAllMetadataForTarget(provider: IProvider): Array<IMetadata>;

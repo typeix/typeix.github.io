@@ -126,7 +126,7 @@ nav:
   - Packages:
       - Philosophy: packages.md
       - Metadata: packages/typeix-metadata.md
-      - Dependency Injection (DI): packages/typeix-di.md
+      - Dependency Injection: packages/typeix-di.md
 #      - "@typeix/modules": packages/typeix-modules.md
 #      - "@typeix/utils": packages/typeix-utils.md
 #      - "@typeix/router": packages/typeix-router.md
