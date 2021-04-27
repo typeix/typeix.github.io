@@ -1,3 +1,6 @@
+.md-bg-black {
+    background-color: black;
+}
 .md-bg-theme {
     background-color: var(--md-footer-bg-color);
     color: var(--md-footer-fg-color);
@@ -73,8 +76,8 @@
     font-weight: bold;
     font-size: 2rem;
 }
-.md-main {
-    display: none;
+.md-main .md-content {
+   display: none;
 }
 @media screen and (max-width: 60em) {
     .mdx-hero {

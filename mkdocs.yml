@@ -69,11 +69,12 @@ plugins:
 
 # Customization
 extra:
+  twitter: typeixframework
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/typeix
     - icon: fontawesome/brands/twitter
-      link: https://twitter.com/igorzg1987
+      link: https://twitter.com/typeixframework
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/igorivanoviczg
 
@@ -120,9 +121,19 @@ markdown_extensions:
 # Page tree
 nav:
   - Home: index.md
-  - Getting Started: index.md
-  - Support: index.md
-
+#  - Getting Started:
+#      - Installation: getting-started.md
+  - Packages:
+      - Philosophy: packages.md
+      - Metadata: packages/typeix-metadata.md
+      - Dependency Injection (DI): packages/typeix-di.md
+#      - "@typeix/modules": packages/typeix-modules.md
+#      - "@typeix/utils": packages/typeix-utils.md
+#      - "@typeix/router": packages/typeix-router.md
+#      - "@typeix/logger": packages/typeix-logger.md
+#      - "@typeix/resty": packages/typeix-resty.md
+#      - "@typeix/resty-aws-lambda": packages/typeix-resty-aws-lambda.md
+#  - Benchmarks: benchmarks.md
 # Google Analytics
 #google_analytics:
 #  - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
