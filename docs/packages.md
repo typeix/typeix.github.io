@@ -2,7 +2,7 @@
 template: main.html
 title: Philosophy
 ---
-
+# Philosophy
 In 2016 inspired by Angular first version of typeix was born, which provides an application architecture to allow effortless 
 creation of highly testable, scalable, loosely coupled and easily maintainable applications.
 
