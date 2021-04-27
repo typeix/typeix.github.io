@@ -124,7 +124,7 @@ nav:
 #  - Getting Started:
 #      - Installation: getting-started.md
   - Packages:
-      - Philosophy: packages.md
+      - Introduction: packages.md
       - Metadata: packages/typeix-metadata.md
       - Dependency Injection: packages/typeix-di.md
 #      - Modules: packages/typeix-modules.md
