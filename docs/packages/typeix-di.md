@@ -1,6 +1,6 @@
 ---
 template: main.html 
-title: Dependency Injection
+title: Dependency Injection for Typescript projects
 ---
 # Dependency Injection
 Dependency Injection (DI) is a design pattern used to implement IoC. It allows the creation of dependent objects outside
@@ -113,7 +113,7 @@ interface IProvider {
 
 ## Injector API
 **NOTE:** <br/> By default all providers are immutable, however you can define mutable provider keys. <br />
-If provider is not mutable and you are trying to create new instance of same provider on current Injector instance, 
+If provider is not mutable, and you are trying to create new instance of same provider on current Injector instance, 
 injector will throw error.
 
 `Injector.getProviders(provider: IProvider, propertyKey?: string)` will return all providers which needs to be injected, 

@@ -1,6 +1,6 @@
 ---
 template: main.html 
-title: Metadata decorators for Typescript
+title: Metadata decorators for Typescript projects
 ---
 # Metadata
 With the introduction of Classes in TypeScript and ES6, there now exist certain scenarios that require additional
