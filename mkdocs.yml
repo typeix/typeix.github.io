@@ -7,7 +7,7 @@ extra_css: [ ]
 # Repository
 repo_name: typeix
 repo_url: https://github.com/typeix/typeix
-docs_url: https://docs.typeix.com
+docs_url: https://github.com/typeix/resty-webapp-starter
 edit_uri: ""
 
 
