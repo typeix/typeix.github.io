@@ -130,10 +130,11 @@ nav:
       - Modules: packages/typeix-modules.md
       - Router: packages/typeix-router.md
       - Logger: packages/typeix-logger.md
-#      - Resty:
-#          - Server: packages/resty/typeix-resty.md
-#          - AWS Lambda Adapter: packages/resty/typeix-resty-aws-lambda.md
+      - Resty:
+          - REST Server: packages/resty/typeix-resty.md
+          # - AWS Lambda Adapter: packages/resty/typeix-resty-aws-lambda.md
 #  - Benchmarks: benchmarks.md
+  - Roeadmap: roadmap.md
 # Google Analytics
 google_analytics:
   - "G-CRNY5PJKJH"
