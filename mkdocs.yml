@@ -46,9 +46,9 @@ theme:
   # Default values, taken from mkdocs_theme.yml
   language: en
   features:
-    # - navigation.instant
     - navigation.sections
     - navigation.tabs
+    - navigation.tabs.sticky
   palette:
     - scheme: slate
       primary: red
@@ -128,11 +128,11 @@ nav:
       - Metadata: packages/typeix-metadata.md
       - Dependency Injection: packages/typeix-di.md
       - Modules: packages/typeix-modules.md
-#      - "@typeix/utils": packages/typeix-utils.md
-#      - "@typeix/router": packages/typeix-router.md
-#      - "@typeix/logger": packages/typeix-logger.md
-#      - "@typeix/resty": packages/typeix-resty.md
-#      - "@typeix/resty-aws-lambda": packages/typeix-resty-aws-lambda.md
+      - Router: packages/typeix-router.md
+      - Logger: packages/typeix-logger.md
+#      - Resty:
+#          - Server: packages/resty/typeix-resty.md
+#          - AWS Lambda Adapter: packages/resty/typeix-resty-aws-lambda.md
 #  - Benchmarks: benchmarks.md
 # Google Analytics
 google_analytics:

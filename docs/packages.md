@@ -1,6 +1,6 @@
 ---
 template: main.html
-title: Introduction
+title: Packages Introduction
 ---
 # Introduction
 In 2016 inspired by Angular first version of typeix was born, which provides an application architecture to allow effortless 
