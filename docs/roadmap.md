@@ -9,9 +9,9 @@ I'm currently working in my spare time to deliver new features, proper documenta
 ## Features
 * 7.5.0 CLI Tools
 * 7.6.0 Configuration Management
-* 7.7.0 TypeORM Adapter
-* 7.8.0 Mongo Adapter
-* 7.9.0 Redis Adapter
+* 7.7.0 TypeORM Adapter (Docs only, it's fully compatible with TypeORM)
+* 7.8.0 Mongo Adapter (Docs only, it's fully compatible with Mongoose for Typescript)
+* 7.9.0 Redis Adapter (Docs only, it's fully compatible with Redis for Typescript)
 * 7.10.0 Websockets Integration
 * 7.11.0 Swagger Support
 * 7.12.0 GraphQL Adapter

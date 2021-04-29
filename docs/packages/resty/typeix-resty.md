@@ -15,7 +15,7 @@ Resty has unique features:
 * Routing (Dynamic & Static)
 * AWS Lambda Adapter
 * Supports MVC Structure
-* Supports 
+
 
 Fast start with [application starter kit](https://github.com/typeix/resty-webapp-starter).
 
