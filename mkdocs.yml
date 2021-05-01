@@ -132,7 +132,7 @@ nav:
       - Logger: packages/typeix-logger.md
       - Resty: packages/resty/typeix-resty.md
           # - AWS Lambda Adapter: packages/resty/typeix-resty-aws-lambda.md
-#  - Benchmarks: benchmarks.md
+  - Benchmarks: benchmarks.md
   - Roadmap: roadmap.md
 # Google Analytics
 google_analytics:

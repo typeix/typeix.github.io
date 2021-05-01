@@ -1,5 +1,5 @@
 ---
-template: main.html
+template: full-container.html
 title: Typeix Roadmap
 ---
 # Roadmap
