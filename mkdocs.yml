@@ -121,8 +121,8 @@ markdown_extensions:
 # Page tree
 nav:
   - Home: index.md
-#  - Getting Started:
-#      - Installation: getting-started.md
+  - Getting Started:
+      - Installation: getting-started.md
   - Packages:
       - Introduction: packages.md
       - Metadata: packages/typeix-metadata.md
