@@ -7,7 +7,7 @@ In 2016 first Typeix version was born, however I never created proper documentat
 I'm currently working in my spare time to deliver new features, proper documentation, free video courses.
 
 ## Features
-* 7.5.0 CLI Tools
+* [7.5.0 CLI Tools](getting-started.md)
 * 7.6.0 Configuration Management
 * 7.7.0 TypeORM Adapter (Docs only, it's fully compatible with TypeORM)
 * 7.8.0 Mongo Adapter (Docs only, it's fully compatible with Mongoose for Typescript)

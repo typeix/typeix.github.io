@@ -17,7 +17,7 @@ Resty has unique features:
 * Supports MVC Structure
 
 
-Fast start with [application starter kit](https://github.com/typeix/resty-webapp-starter).
+Docs and starting point you can find in [getting started](/getting-started) page.
 
 Documentation will be updated and each decorator and interface will be explained in separate section.
 
