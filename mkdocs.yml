@@ -7,7 +7,7 @@ extra_css: [ ]
 # Repository
 repo_name: typeix
 repo_url: https://github.com/typeix/typeix
-docs_url: https://github.com/typeix/resty-webapp-starter
+docs_url: /getting-started
 edit_uri: ""
 
 
@@ -123,6 +123,7 @@ nav:
   - Home: index.md
   - Getting Started:
       - Installation: getting-started.md
+      - Controllers: documentation/controllers.md
   - Packages:
       - Introduction: packages.md
       - Metadata: packages/typeix-metadata.md

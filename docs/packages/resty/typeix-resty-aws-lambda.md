@@ -10,6 +10,8 @@ forwards requests to lambda, make sure that you assigned correct permissions.
 
 I will add complete code example and schematics starter!
 
+Azure and GCP adapters will be added as well!
+
 ## Usage
 In example below you can find basic application server starter:
 ```ts
