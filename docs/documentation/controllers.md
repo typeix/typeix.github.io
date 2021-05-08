@@ -4,7 +4,7 @@ title: Controllers
 ---
 # Controllers
 Controllers are responsible for handling incoming requests and returning responses to the client, 
-on each request new controller instance is created.
+on each request **new controller instance** is created.
 
 The routing mechanism controls which controller receives which requests. 
 Frequently, each controller has more than one route, and different routes can perform different actions.
@@ -214,7 +214,7 @@ export function SetHeader(key: strin, value: string) {
 
 Simple usage of custom decorators in controllers:
 ```ts
-import { Controller, GET, Inject, BodyAsBufferInterceptor } from "@typeix/resty";
+import { Controller, GET, Inject, BodyAsBufferInterceptor, addRequestInterceptor } from "@typeix/resty";
 import { IncomingMessage, ServerResponse } from "http";
 
 @Controller({
@@ -260,3 +260,56 @@ export class CustomerController {
 }
 ```
 
+## Async Executions
+By default, all requests can return async or sync results, Typeix know how to handle them, same rule apply to DI and Resty interceptors.
+
+```ts
+import { Controller, GET, Inject, BodyAsBufferInterceptor } from "@typeix/resty";
+import { IncomingMessage, ServerResponse } from "http";
+
+@Controller({
+    path: "/customers"
+})
+export class CustomerController {
+
+  @Inject() customerService: CustomerService;  
+
+  @GET()
+  syncResult() {
+    return {
+        message: "This is an sync way"
+    }
+  }
+
+  @GET("/async")
+  async asyncResult(): Promise<any> {
+    const customer = await this.customerService.findOne();
+    return {
+        message: "This is an nice customer",
+        customer
+    }
+  }
+}
+```
+
+## Request Payloads
+In example below you can see how simple it is to get body as buffer with built in request interceptor `BodyAsBufferInterceptor`:
+```ts
+import { Controller, GET, Inject, BodyAsBufferInterceptor, addRequestInterceptor } from "@typeix/resty";
+import { IncomingMessage, ServerResponse } from "http";
+
+@Controller({
+    path: "/customers"
+})
+export class CustomerController {
+
+  @Inject() customerService: CustomerService;
+
+  @POST()
+  @addRequestInterceptor(BodyAsBufferInterceptor)
+  create(@Inject() body: Buffer) {
+    const entity = JSON.parse(body.toString());  
+    return this.customerService.create(entity);
+  }
+}
+```

@@ -124,6 +124,7 @@ nav:
   - Getting Started:
       - Installation: getting-started.md
       - Controllers: documentation/controllers.md
+      - Providers: documentation/providers.md
   - Packages:
       - Introduction: packages.md
       - Metadata: packages/typeix-metadata.md
