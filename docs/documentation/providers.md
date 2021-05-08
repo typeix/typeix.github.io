@@ -34,7 +34,7 @@ interface IProvider {
 }
 ```
 
-## Services
+## Scopes
 In code below you can see application scope created services:
 ```ts
 import {Injectable, Module, Controller, Inject, GET} from "@typeix/resty";
@@ -100,4 +100,27 @@ export class CustomerController {
 export class ApplicationModule {}
 ```
 
+## Injection Points
+Once your provider is created by dependency injection system you can use `@Inject()` decorator to 
+deliver your object instance to arbitrary provider.
+There are two injection points, parameter and property.
+```ts
+import {Injectable, Module, Controller, Inject, GET} from "@typeix/resty";
 
+@Controller({
+  path: "/customers"
+})
+export class CustomerController {
+
+  @Inject() customerService: CustomerService;
+  @Inject(CustomerService) customerService: InterfaceCustomerService;
+
+  constructor(@Inject() customerService: CustomerService) {
+  }
+  
+  indexAction(@Inject() customerService: CustomerService) {
+      
+  }
+
+}
+```
