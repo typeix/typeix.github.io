@@ -125,6 +125,7 @@ nav:
       - Installation: getting-started.md
       - Documentation:
         - Controllers: documentation/controllers.md
+        - Modules: documentation/modules.md
         - Providers: documentation/providers.md
   - Packages:
       - Introduction: packages.md
