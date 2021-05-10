@@ -31,8 +31,6 @@ interface RootModuleMetadata extends ModuleMetadata {
 }
 ```
 
-
-
 ## Feature modules
 Feature modules are modules which are belonging to same application domain, specific business feature and 
 helps to keep code more organized, manage complexity and to implement SOLID principles.
@@ -116,3 +114,57 @@ export class AdminModule {
     
 }
 ```
+We can as well share providers inside of root module, but keep in mind that change is actually making 
+that provider visible to all modules! <br />
+Root Module Definition:
+```ts
+import {Module} from "@typeix/resty";
+import {AdminService} from "./modules/admin/services/admin.service";
+
+@Module({
+  shared_providers: [AdminService]
+})
+export class ApplicationModule {
+    
+}
+```
+## Module exporting
+It's possible to share providers by importing and exporting providers from modules.  <br />
+Providers that must be exported to other modules needs to be defined in `exports` metadata
+inside of module metadata.
+```ts
+import {Module} from "@typeix/resty";
+import {AdminController} from "./controllers/admin.controller";
+import {AdminService} from "./services/admin.service";
+
+@Module({
+  path: "/admin",
+  providers: [AdminService],
+  exports: [AdminService]
+})
+export class AdminModule {
+    
+}
+```
+Once module exports providers that wants to export, module that imports `GuestModule` must define
+`imports` or modules to be imported! <br />
+If you want that same service is re-exported it's possible to re-export by defining provider exports to
+imported module!
+```ts
+import {Module} from "@typeix/resty";
+import {AdminModule} from "./modules/admin/admin.module";
+import {AdminService} from "./modules/admin/services/admin.service";
+
+@Module({
+  path: "/guest",
+  imports: [AdminModule],
+  exports: [AdminService]
+})
+export class GuestModule {
+    
+}
+```
+
+## Dynamic modules
+Resty framework supports dynamic modules and controllers via resty routing, but we will tackle this 
+topic in routing documentation!
