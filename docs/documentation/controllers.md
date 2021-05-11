@@ -191,7 +191,7 @@ export class CustomerController {
 Creating decorators as method interceptors to provide nicer custom api can be done with a power of Typeix dependency injection.
 In example below you can find a custom method interceptor in which you can inject any of your custom service:
 ```ts
-import { Injectable, Inject, Interceptor, Method, createMethodInterceptor } from "@typeix/resty";
+import { Injectable, Inject, Interceptor, Method, createMethodInterceptor, isObject, isString } from "@typeix/resty";
 import { ServerResponse } from "http";
 
 @Injectable()
@@ -200,14 +200,20 @@ class SetHeaderInterceptor implements Interceptor {
   @Inject() response: ServerResponse;
 
   invoke(method: Method): any {
-    this.response.setHeader(method.decoratorArgs.key, method.decoratorArgs.value);
+    if (isObject(method.decoratorArgs.key)) {
+      Object.keys(method.decoratorArgs.key).forEach(key => {
+        this.response.setHeader(key, Reflect.get(method.decoratorArgs.key, key));
+      });
+    } else if (isString(method.decoratorArgs.key) && isString(method.decoratorArgs.value)) {
+      this.response.setHeader(method.decoratorArgs.key, method.decoratorArgs.value);
+    }
   }
 }
 ```
 
 After defining interceptor we need to define custom decorator:
 ```ts
-export function SetHeader(key: strin, value: string) {
+export function SetHeader(key: string | {[key:string]: string}, value?: string) {
   return createMethodInterceptor(SetHeader, SetHeaderInterceptor, {key, value});
 }
 ```
@@ -227,8 +233,10 @@ export class CustomerController {
   @Inject() customerService: CustomerService;
 
   @POST()
-  @SetHeader("Cache-Control", "none")
-  @SetHeader("Content-Type", "application/json")
+  @SetHeader({
+    "Cache-Control": "none", 
+    "Content-Type": "application/json"
+  })
   @addRequestInterceptor(BodyAsBufferInterceptor)
   create(@Inject() body: Buffer) {
     return this.customerService.create(entity);
