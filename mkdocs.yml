@@ -128,6 +128,9 @@ nav:
         - Modules: documentation/modules.md
         - Providers: documentation/providers.md
         - Interceptors: documentation/interceptors.md
+        - Testing: documentation/testing.md
+#      - Integrations:
+#          TypeORM: documentation/type-orm.md
   - Packages:
       - Introduction: packages.md
       - Metadata: packages/typeix-metadata.md
