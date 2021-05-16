@@ -8,16 +8,15 @@ I'm currently working in my spare time to deliver new features, proper documenta
 
 ## Features
 * [7.5.0 CLI Tools](getting-started.md)
-* 7.6.0 Configuration Management
-* 7.7.0 TypeORM Adapter (Docs only, it's fully compatible with TypeORM)
-* 7.8.0 Mongo Adapter (Docs only, it's fully compatible with Mongoose for Typescript)
-* 7.9.0 Redis Adapter (Docs only, it's fully compatible with Redis for Typescript)
-* 7.10.0 Websockets Integration
-* 7.11.0 Swagger Support
-* 7.12.0 GraphQL Adapter
-* 7.13.0 Kafka Adapter
-* 7.14.0 KSQL Adapter (Confluent
-* 7.15.0 KeyCloak, JWT Adapter
-* 7.15.0 Security - CORS, CSRF Protection
+* [8.x TypeORM](documentation/type-orm.md) (Documentation only, it's fully compatible with TypeORM)
+* 8.x Mongo (Documentation only, it's fully compatible with Mongoose for Typescript)
+* 8.x Redis (Documentation only, it's fully compatible with Redis for Typescript)
+* 8.x Kafka (Documentation only, it's fully compatible with Kafka for Typescript)
+* 8.x KeyCloak, JWT (Documentation only, it's fully compatible with Keycloack.js for Typescript)
+* 8.x Configuration Management - (Documentation only)
+* 8.1 Websockets Integration
+* 8.2 Swagger Support
+* 8.3 GraphQL Adapter
+
 
 You can request feature via twitter or github, which can be voted and will be added as separate package.
