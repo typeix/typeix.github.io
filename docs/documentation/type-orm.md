@@ -103,12 +103,9 @@ Inside datastore module let's create connection config file:
 
 ```ts
 import {CreateProvider, Injectable} from "@typeix/resty";
-import {Connection, createConnection, Logger} from "typeorm";
-import {Repository} from "typeorm/repository/Repository";
-import {EntityTarget} from "typeorm/common/EntityTarget";
-import * as pgConfig from "~/orm-config.json";
-import {ConnectionOptions} from "typeorm/connection/ConnectionOptions";
+import {Connection, createConnection, Logger, ObjectType, EntityManager, ConnectionOptions} from "typeorm";
 import {PgLoggerConfig} from "~/data-store/configs/pg.logger.config";
+import * as pgConfig from "~/orm-config.json";
 
 @Injectable()
 export class PgConfig {
@@ -118,6 +115,7 @@ export class PgConfig {
     useFactory: async (logger: Logger) => {
       return await createConnection(<ConnectionOptions>{
         ...pgConfig,
+        name: "default",
         logging: process.env.NODE_ENV !== "prod",
         logger
       });
@@ -125,12 +123,13 @@ export class PgConfig {
     providers: [PgLoggerConfig]
   }) private connection: Connection;
 
-  getConnection(): Connection {
-    return this.connection;
+
+  getEntityManager(): EntityManager {
+    return this.connection.manager;
   }
 
-  getRepository<T>(entity: EntityTarget<T>): Repository<T> {
-    return this.connection.getRepository(entity);
+  getCustomRepository<T>(entity: ObjectType<T>): T {
+    return this.connection.getCustomRepository(entity);
   }
 }
 ```
@@ -219,7 +218,6 @@ To add database columns, you simply need to decorate an entity's properties you 
 a `@Column` decorator.
 
 Let's create our first User Entity:
-
 ```ts
 import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
@@ -241,81 +239,51 @@ export class User {
 }
 ```
 
-## Services
-Entity services are finely-grained services that look after a single data entity, normally exposing nothing more than simple CRUD methods.
+## Repository
+Repository is just like EntityManager but its operations are limited to a concrete entity.
 
-In following example we will create generic entity service with some generic repository methods:
-```ts
-import {Inject, Injectable} from "@typeix/resty";
-import {PgConfig} from "~/data-store/configs/pg.config";
-import {Repository} from "typeorm/repository/Repository";
-import {DeleteResult} from "typeorm/query-builder/result/DeleteResult";
-import {FindConditions} from "typeorm/find-options/FindConditions";
-import {FindOneOptions} from "typeorm/find-options/FindOneOptions";
-import {ObjectID} from "typeorm/driver/mongodb/typings";
-
-@Injectable()
-export abstract class EntityService<T> {
-
-  @Inject() protected connection: PgConfig;
-
-
-  findAll(): Promise<Array<T>> {
-    return this.getRepository().find();
-  }
-
-  findOne(id?: string | number | Date | ObjectID, options?: FindOneOptions<T>)
-  findOne(options?: FindOneOptions<T>)
-  findOne(conditions?: FindConditions<T>, options?: FindOneOptions<T>)
-  findOne(criteria: any, options?: any): Promise<T> {
-    return this.getRepository().findOne(criteria, options);
-  }
-
-  save(entity: T): Promise<T> {
-    return this.getRepository().save(entity);
-  }
-
-  create(entity: T): T {
-    return this.getRepository().create(entity);
-  }
-
-  remove(entity: T): Promise<T> {
-    return this.getRepository().remove(entity);
-  }
-
-  update(criteria: number | object | Array<number>, entity: T): Promise<DeleteResult> {
-    return this.getRepository().update(criteria, entity);
-  }
-
-  count(options?: FindOneOptions<T>)
-  count(conditions?: FindConditions<T>)
-  count(criteria: any): Promise<number> {
-    return this.getRepository().count(criteria);
-  }
-
-  delete(criteria: number | object | Array<number>): Promise<DeleteResult> {
-    return this.getRepository().delete(criteria);
-  }
-
-  abstract getRepository(): Repository<T>;
-}
-```
-
-Finally let's implement UserService:
+In following example you can see implementation of UserRepository
 ```ts
 import {Injectable} from "@typeix/resty";
 import {User} from "~/data-store/entity/user.entity";
-import {Repository} from "typeorm/repository/Repository";
-import {EntityService} from "~/data-store/services/enttiy.service";
+import {EntityRepository, Repository} from "typeorm";
 
 @Injectable()
-export class UserService extends EntityService<User> {
-  getRepository(): Repository<User> {
-    return this.connection.getRepository(User);
-  }
+@EntityRepository(User)
+export class UserRepository extends Repository<User> {
+
 }
 ```
 
+TypeORM and Resty needs to be aware about custom repositories, so we initialize them in modules:
+```ts
+import {Module} from "@typeix/resty";
+import {PgConfig} from "~/modules/datastore/configs/pg.config";
+import {UserRepository} from "~/data-store/repository/user.repository";
+
+@Module({
+  providers: [
+    PgConfig,
+    {
+      provide: UserRepository,
+      useFactory: config => config.getCustomRepository(UserRepository),
+      providers: [PgConfig]
+    }
+  ],
+  exports: [UserRepository]
+})
+export class PgModule {
+
+}
+```
+
+## Transactions
+  
+## Subscribers
+
+## Migrations
+
+## Services
 NOTE:
 > Name services should be done using verbs instead of nouns! <br />
 > There is no “user domain” and there should also be no “UserService”.  <br />
@@ -323,30 +291,4 @@ NOTE:
 
 By naming our service by the primary business action or process we also make it clear what is the behavior we want it to implement.
 
-Implementation in controller:
-```ts
-import {Controller, Inject, GET} from "@typeix/resty";
-import {AppService} from "./app.service";
-import {UserService} from "~/data-store/services/user.service";
 
-@Controller({
-  path: "/",
-  providers: [],
-  interceptors: []
-})
-export class AppController {
-
-  @Inject() userService: UserService;
-
-  @GET("users")
-  findAllUsers() {
-    return this.userService.findAll();
-  }
-}
-
-```
-## Transactions
-
-## Subscribers
-
-## Migrations
