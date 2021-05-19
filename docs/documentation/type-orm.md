@@ -134,8 +134,169 @@ export class PgConfig {
 }
 ```
 
-## Logger
+## Entity
 
+Entity is a class that maps to a database table (or collection when using MongoDB).
+
+Entity is your model decorated by an `@Entity` decorator, a database table will be created for such models. You can
+load/insert/update/remove and perform other operations with them.
+
+To add database columns, you simply need to decorate an entity's properties you want to make into a column with
+a `@Column` decorator.
+
+Let's create our first User Entity:
+```ts
+import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+
+@Entity()
+export class User {
+
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column()
+  firstName: string;
+
+  @Column()
+  lastName: string;
+
+  @Column()
+  age: number;
+
+}
+```
+
+## Repository
+Repository is just like EntityManager but its operations are limited to a concrete entity.
+
+In following example you can see implementation of UserRepository
+```ts
+import {Injectable} from "@typeix/resty";
+import {User} from "~/data-store/entity/user.entity";
+import {EntityRepository, Repository} from "typeorm";
+
+@Injectable()
+@EntityRepository(User)
+export class UserRepository extends Repository<User> {
+
+}
+```
+
+TypeORM and Resty needs to be aware about custom repositories, so we initialize them in modules:
+```ts
+import {Module} from "@typeix/resty";
+import {PgConfig} from "~/data-store/configs/pg.config";
+import {UserRepository} from "~/data-store/repository/user.repository";
+
+@Module({
+  providers: [
+    PgConfig,
+    {
+      provide: UserRepository,
+      useFactory: config => config.getCustomRepository(UserRepository),
+      providers: [PgConfig]
+    }
+  ],
+  exports: [UserRepository, PgConfig]
+})
+export class PgModule {
+
+}
+```
+
+## Transactions
+A database transaction symbolizes a unit of work performed within a database management system against a database,
+and treated in a coherent and reliable way independent of other transactions.
+
+In following example you can see implementation of transactional request interceptor, and we can use it in controller:
+```ts
+import {
+  addRequestInterceptor,
+  Inject,
+  Injectable,
+  Injector,
+  InterceptedRequest,
+  RequestInterceptor
+} from "@typeix/resty";
+import {PgConfig} from "~/modules/datastore/configs/pg.config";
+import {Repository} from "typeorm";
+
+
+@Injectable()
+class TransactionalInterceptor implements RequestInterceptor {
+
+  @Inject() injector: Injector;
+  @Inject() config: PgConfig;
+
+  async invoke(request: InterceptedRequest): Promise<any> {
+    const queryRunner = this.config.getConnection().createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction("READ COMMITTED");
+    try {
+      const type = request.args.type;
+      const repository: Repository<typeof type> = await queryRunner.manager.getCustomRepository(type);
+      this.injector.set(type, repository);
+      await request.handler();
+      await queryRunner.commitTransaction();
+    } catch (err) {
+      await queryRunner.rollbackTransaction();
+    } finally {
+      await queryRunner.release();
+    }
+  }
+
+}
+
+/**
+ * Transactional
+ * @param type
+ * @constructor
+ */
+export function Transactional<T>(type: T) {
+  return addRequestInterceptor(TransactionalInterceptor, {type});
+}
+
+```
+As we can see below in controller we inject transactional UserRepository which is injected by Transactional Interceptor
+```ts
+@Controller({
+  path: "/",
+  providers: [],
+  interceptors: []
+})
+export class AppController {
+
+  @Inject() appService: AppService;
+  @Inject() userRepository: UserRepository;
+
+  @POST("users")
+  @Transactional(UserRepository)
+  createUser(@Inject() repository: UserRepository) { // repository is injected by transaction interceptor!
+    const user = new User();
+    user.age = 100;
+    user.firstName = "Igor";
+    user.lastName = "Surname";
+    return repository.save(user);
+  }
+}
+```
+## Subscribers
+With TypeORM subscribers, you can listen to specific entity events.
+
+## Migrations
+Migrations provide a way to incrementally update the database schema to keep it in sync with the
+application's data model while preserving existing data in the database.
+To generate, run, and revert migrations, TypeORM provides a dedicated CLI.
+```json
+{
+  "scripts": {
+    "migration:run": "typeorm -f src/ormconfig.json migration:run",
+    "migration:create": "typeorm -f src/ormconfig.json migration:create -n",
+  }
+}
+```
+
+## Logger
 You can enable logging of all queries and errors by simply setting logging: true in your connection options. You can
 enable different types of logging in connection options:
 
@@ -207,83 +368,9 @@ export class PgLoggerConfig implements TypeOrmLogger {
 }
 ```
 
-## Entity
-
-Entity is a class that maps to a database table (or collection when using MongoDB).
-
-Entity is your model decorated by an `@Entity` decorator, a database table will be created for such models. You can
-load/insert/update/remove and perform other operations with them.
-
-To add database columns, you simply need to decorate an entity's properties you want to make into a column with
-a `@Column` decorator.
-
-Let's create our first User Entity:
-```ts
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
-
-@Entity()
-export class User {
-
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  firstName: string;
-
-  @Column()
-  lastName: string;
-
-  @Column()
-  age: number;
-
-}
-```
-
-## Repository
-Repository is just like EntityManager but its operations are limited to a concrete entity.
-
-In following example you can see implementation of UserRepository
-```ts
-import {Injectable} from "@typeix/resty";
-import {User} from "~/data-store/entity/user.entity";
-import {EntityRepository, Repository} from "typeorm";
-
-@Injectable()
-@EntityRepository(User)
-export class UserRepository extends Repository<User> {
-
-}
-```
-
-TypeORM and Resty needs to be aware about custom repositories, so we initialize them in modules:
-```ts
-import {Module} from "@typeix/resty";
-import {PgConfig} from "~/modules/datastore/configs/pg.config";
-import {UserRepository} from "~/data-store/repository/user.repository";
-
-@Module({
-  providers: [
-    PgConfig,
-    {
-      provide: UserRepository,
-      useFactory: config => config.getCustomRepository(UserRepository),
-      providers: [PgConfig]
-    }
-  ],
-  exports: [UserRepository]
-})
-export class PgModule {
-
-}
-```
-
-## Transactions
-  
-## Subscribers
-
-## Migrations
-
 ## Services
+TBD...
+
 NOTE:
 > Name services should be done using verbs instead of nouns! <br />
 > There is no “user domain” and there should also be no “UserService”.  <br />
