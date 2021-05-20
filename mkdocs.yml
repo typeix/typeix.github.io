@@ -66,6 +66,8 @@ plugins:
   - search
   - minify:
       minify_html: true
+      htmlmin_opts:
+        remove_optional_attribute_quotes: false
 
 # Customization
 extra:
