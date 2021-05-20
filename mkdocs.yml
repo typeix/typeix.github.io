@@ -2,7 +2,7 @@ site_name: Typeix
 site_url: https://typeix.com/
 site_author: Igor Ivanovic
 site_description: >-
-  A progressive Node.js framework for building efficient and scalable applications and libraries.
+  Fast, unopinionated, minimalist typescript framework for building efficient and scalable applications.
 extra_css: [ ]
 # Repository
 repo_name: typeix
@@ -17,7 +17,7 @@ copyright: Copyright &copy; 2016 - 2021 Igor Ivanovic
 home:
   intro_section:
     h1: Hello, Typeix!
-    description: Fast, unopinionated, minimalist framework for building efficient and scalable applications and libraries.
+    description: Fast, unopinionated, minimalist framework for building efficient and scalable applications and libraries with typescript or javascript.
   badges:
     - title: EXTENSIBLE
       description: Provides flexibility by allowing use core libraries in own projects.
