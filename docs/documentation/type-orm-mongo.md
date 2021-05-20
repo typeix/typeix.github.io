@@ -47,17 +47,13 @@ Goal is to generate following structure
 L src
   L orm-config.json
   L data-store
-      L data-store.module.ts
+      L mongo.module.ts
       L config
-         L pg.config.ts
-         L pg.logger.config.ts
+         L mongo.config.ts
       L entity
          L user.entity.ts
-      L services
-         L entity.service.ts
-         L user.service.ts
-      L migration
-         L {timestamp}-users.ts
+      L repository
+         L user.repository.ts
 ```
 
 ## Connection

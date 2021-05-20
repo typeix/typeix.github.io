@@ -52,15 +52,14 @@ Goal is to generate following structure
 L src
   L orm-config.json
   L data-store
-      L data-store.module.ts
+      L pg.module.ts
       L config
          L pg.config.ts
          L pg.logger.config.ts
       L entity
          L user.entity.ts
-      L services
-         L entity.service.ts
-         L user.service.ts
+      L repository
+         L user.repository.ts
       L migration
          L {timestamp}-users.ts
 ```
