@@ -134,6 +134,7 @@ nav:
       - Integrations:
           Databases:
             - SQL with TypeORM: documentation/type-orm.md
+            - Mongodb with TypeORM: documentation/type-orm-mongo.md
   - Packages:
       - Introduction: packages.md
       - Metadata: packages/typeix-metadata.md

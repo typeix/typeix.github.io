@@ -1,5 +1,6 @@
 ---
-template: main.html title: TypeORM integration
+template: main.html 
+title: SQL with TypeORM integration
 ---
 
 # TypeORM
