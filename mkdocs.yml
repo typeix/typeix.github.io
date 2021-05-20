@@ -131,7 +131,7 @@ nav:
         - Testing: documentation/testing.md
       - Integrations:
           Databases:
-            - TypeORM: documentation/type-orm.md
+            - SQL with TypeORM: documentation/type-orm.md
   - Packages:
       - Introduction: packages.md
       - Metadata: packages/typeix-metadata.md
