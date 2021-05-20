@@ -4,7 +4,7 @@
 {% if page and page.title and not page.is_homepage %}
 {% set title = config.site_name ~ " - " ~ page.title | striptags %}
 {% endif %}
-{% set image = config.site_url ~ 'assets/logo.png' %}
+{% set image = config.site_url ~ '/assets/logo.png' %}
 <meta property="og:type" content="website">
 <meta property="og:title" content="{{ title }}">
 <meta property="og:description" content="{{ config.site_description }}">
@@ -19,9 +19,9 @@
 <meta name="twitter:title" content="{{ title }}">
 <meta name="twitter:description" content="{{ config.site_description }}">
 <meta name="twitter:image" content="{{ image }}">
-<link rel="stylesheet" href="{{ 'assets/stylesheets/main.4ea92eb1.min.css' | url }}">
+<link rel="stylesheet" href="{{ '/assets/stylesheets/main.4ea92eb1.min.css' | url }}">
 {% if page.is_homepage %}
-<link rel="stylesheet" href="{{ 'assets/stylesheets/home.css' | url }}">
+<link rel="stylesheet" href="{{ '/assets/stylesheets/home.css' | url }}">
 {% endif %}
 {% endblock %}
 {% block announce %}
@@ -35,5 +35,5 @@
 {% endblock %}
 {% block scripts %}
 {{ super() }}
-<script src="{{ 'assets/javascripts/bundle.3b3ca511.min.js' | url }}"></script>
+<script src="{{ '/assets/javascripts/bundle.3b3ca511.min.js' | url }}"></script>
 {% endblock %}
