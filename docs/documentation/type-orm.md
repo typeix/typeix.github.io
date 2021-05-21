@@ -5,13 +5,16 @@ title: SQL with TypeORM integration
 
 # TypeORM
 
-TypeORM is an ORM that can run in NodeJS, and can be used with TypeScript.
+Object–relational mapping (ORM, O/RM, and O/R mapping tool) in computer science 
+is a programming technique for converting data between incompatible type systems 
+using object-oriented programming languages.
+
+TypeORM is an ORM that can run in NodeJS, and can be used with TypeScript. TypeORM provides support for 
+many relational databases: PostgreSQL, Oracle, Microsoft SQL Server, SQLite, and even NoSQL
+databases like MongoDB.
 
 TypeORM supports both Active Record and Data Mapper patterns, unlike all other JavaScript ORMs currently in existence,
 which means you can write high quality, loosely coupled, scalable, maintainable applications the most productive way.
-
-TypeORM provides support for many relational databases: PostgreSQL, Oracle, Microsoft SQL Server, SQLite, and even NoSQL
-databases like MongoDB.
 
 Resty framework fully supports integration with typeorm without any extra library or adapter. You can find full example
 in [resty starters repository](https://github.com/typeix/resty-starters/tree/master/api-typeorm-sql).
