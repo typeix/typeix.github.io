@@ -123,26 +123,28 @@ markdown_extensions:
 # Page tree
 nav:
   - Home: index.md
-  - Getting Started:
-      - Installation: getting-started.md
-      - Documentation:
+  - Documentation:
+      - Getting Started: getting-started.md
+      - Fundamentals:
         - Controllers: documentation/controllers.md
         - Modules: documentation/modules.md
         - Providers: documentation/providers.md
         - Interceptors: documentation/interceptors.md
         - Testing: documentation/testing.md
-      - Integrations:
-          Databases:
-            - SQL with TypeORM: documentation/type-orm.md
-            - Mongodb with TypeORM: documentation/type-orm-mongo.md
-  - Packages:
-      - Introduction: packages.md
-      - Metadata: packages/typeix-metadata.md
-      - Dependency Injection: packages/typeix-di.md
-      - Modules: packages/typeix-modules.md
-      - Router: packages/typeix-router.md
-      - Logger: packages/typeix-logger.md
-      - Resty: packages/resty/typeix-resty.md
+        - Model-View-Controller: documentation/model-view-controller.md
+
+      - Databases:
+          - RDBMS with TypeORM: documentation/type-orm.md
+          - Mongodb with TypeORM: documentation/type-orm-mongo.md
+
+      - "@typeix/packages":
+          - "@typeix/metadata": packages/typeix-metadata.md
+          - "@typeix/di": packages/typeix-di.md
+          - "@typeix/modules": packages/typeix-modules.md
+          - "@typeix/router": packages/typeix-router.md
+          - "@typeix/logger": packages/typeix-logger.md
+          - "@typeix/resty": packages/resty/typeix-resty.md
+
           # - AWS Lambda Adapter: packages/resty/typeix-resty-aws-lambda.md
   - Benchmarks: benchmarks.md
   - Roadmap: roadmap.md

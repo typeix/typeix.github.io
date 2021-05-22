@@ -17,8 +17,6 @@ Resty has unique features:
 * Supports MVC Structure
 
 
-Docs and starting point you can find in [getting started](/getting-started) page.
-
 Documentation will be updated and each decorator and interface will be explained in separate section.
 
 ## Usage
