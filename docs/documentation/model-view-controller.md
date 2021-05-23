@@ -157,10 +157,59 @@ export class HomeController {
       title: "Home page example"
     });
   }
+}
+```
+NOTE:
+> In following example we did not use models, we just send data from controller as mock.
 
+## Render Interceptor
+In order to make repeatable TemplateEngineService code obsolete, we will move that code into method interceptor.
+```ts
+
+import {
+  createMethodInterceptor,
+  Inject,
+  Injectable, Interceptor, Method
+} from "@typeix/resty";
+import {TemplateEngineService} from "~/components/templating-engine.service";
+
+@Injectable()
+export class RenderInterceptor implements Interceptor {
+  @Inject() engine: TemplateEngineService;
+  async invoke(method: Method): Promise<any> {
+    const data = await method.invoke();
+    const result = await this.engine.compileAndRender(method.decoratorArgs.value, data);
+    return await method.transform(result);
+  }
+}
+
+/**
+ * Asset loader service
+ * @constructor
+ * @function
+ * @name Render
+ *
+ * @description
+ * RenderInterceptor template
+ */
+export function Render(value: string) {
+  return createMethodInterceptor(Render, RenderInterceptor, {value});
+}
+```
+In following example you can see that Injecting TemplateEngineService is no longer required
+because we created custom decorator, and we decorated our controller action.
+```ts
+import {Inject, Controller, GET, PathParam, ResolvedRoute, IResolvedRoute} from "@typeix/resty";
+import {Render} from "~/interceptors/render.interceptor";
+
+@Controller({
+  path: "/"
+})
+export class HomeController {
+
+  @GET()
   @Render("main")
-  @GET("/params/<id:(\\d+)>/<name>")
-  async actionId(@PathParam("id") id: number, @PathParam("name") name: string): Promise<any> {
+  async actionIndex(): Promise<Buffer> {
     return {
       id,
       name,
@@ -169,8 +218,3 @@ export class HomeController {
   }
 }
 ```
-NOTE:
-> In following example we did not use models, we just send data from controller as mock.
-
-## Render Interceptor
-TBD.. 
