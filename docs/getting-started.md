@@ -6,7 +6,7 @@ title: Getting started
 # Getting started
 
 ## Prerequisites
-Please make sure that Node.js (gte >= 12.9.0) is installed on your operating system.
+Please make sure that Node.js (gte >= 16.10.0) is installed on your operating system.
 
 ## Description
 Typeix supports both typescript and javascript development with babel compiler!

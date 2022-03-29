@@ -16,7 +16,7 @@ I'm currently working in my spare time to deliver new features, proper documenta
 * 8.x Configuration Management - (Documentation only)
 * 8.1 Websockets Integration
 * 8.2 Swagger Support
-* 8.3 GraphQL Adapter
+* 8.3 GraphQL Adapter - (Documentation only, it's fully compatible with type-graphql for Typescript)
 
 
 You can request feature via twitter or github, which can be voted and will be added as separate package.
