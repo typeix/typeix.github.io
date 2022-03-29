@@ -1,6 +1,9 @@
 ---
-template: full-container.html
+template: main.html
 title: Typeix Roadmap
+hide:
+  - navigation
+  - toc
 ---
 # Roadmap
 In 2016 first Typeix version was born, however I never created proper documentation or advertise framework & tools.

@@ -1,6 +1,9 @@
 ---
-template: full-container.html
+template: main.html
 title: Typeix Benchmarks
+hide:
+  - navigation
+  - toc
 ---
 # Benchmarks
 I'm personally not fun of micro benchmarks because applications can be optimized on multiple layers, however you can find

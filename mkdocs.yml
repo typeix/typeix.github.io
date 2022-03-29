@@ -27,7 +27,7 @@ theme:
   # Default values, taken from mkdocs_theme.yml
   language: en
   features:
-    - navigation.sections
+    - navigation.indexes
     - navigation.tabs
     - navigation.tabs.sticky
   palette:
