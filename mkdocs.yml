@@ -14,25 +14,6 @@ edit_uri: ""
 # Copyright
 copyright: Copyright &copy; 2016 - 2021 Igor Ivanovic
 
-home:
-  intro_section:
-    h1: Hello, Typeix!
-    description: Fast, unopinionated, minimalist framework for building efficient and scalable applications and libraries with typescript or javascript.
-  badges:
-    - title: EXTENSIBLE
-      description: Provides flexibility by allowing use core libraries in own projects.
-      icon: material/cogs
-    - title: VERSATILE
-      description: Adaptable ecosystem for all kinds of server-side applications or custom libraries.
-      icon: material/auto-fix
-    - title: LIGHTWEIGHT
-      description: "@typeix/resty is a minimal and flexible Node.js web application framework that provides a robust set of features."
-      icon: material/progress-wrench
-
-  live_preview:
-    h1: Live preview
-    description: See how your application may potentially look.
-
 theme:
   name: material
   custom_dir: theme
@@ -48,7 +29,7 @@ theme:
   features:
     - navigation.sections
     - navigation.tabs
-#    - navigation.tabs.sticky
+    - navigation.tabs.sticky
   palette:
     - scheme: slate
       primary: red
@@ -65,12 +46,15 @@ theme:
 plugins:
   - search
   - minify:
-      minify_html: true
+      minify_html: false
       htmlmin_opts:
         remove_optional_attribute_quotes: false
 
 # Customization
 extra:
+  analytics:
+    provider: google
+    property: "G-CRNY5PJKJH"
   twitter: typeixframework
   social:
     - icon: fontawesome/brands/github
@@ -120,24 +104,24 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.tilde
 
-# Page tree
+# Page tree - Navigation
 nav:
   - Home: index.md
   - Documentation:
       - Getting Started: getting-started.md
       - Fundamentals:
-        - Controllers: documentation/controllers.md
-        - Modules: documentation/modules.md
-        - Providers: documentation/providers.md
-        - Interceptors: documentation/interceptors.md
-        - Testing: documentation/testing.md
-        - Model-View-Controller: documentation/model-view-controller.md
+          - Controllers: documentation/controllers.md
+          - Modules: documentation/modules.md
+          - Providers: documentation/providers.md
+          - Interceptors: documentation/interceptors.md
+          - Testing: documentation/testing.md
+          - Model-View-Controller: documentation/model-view-controller.md
 
       - Databases:
           - RDBMS with TypeORM: documentation/type-orm.md
           - Mongodb with TypeORM: documentation/type-orm-mongo.md
 
-      - "@typeix/packages":
+      - "Node Packages":
           - "@typeix/metadata": packages/typeix-metadata.md
           - "@typeix/di": packages/typeix-di.md
           - "@typeix/modules": packages/typeix-modules.md
@@ -148,7 +132,24 @@ nav:
           # - AWS Lambda Adapter: packages/resty/typeix-resty-aws-lambda.md
   - Benchmarks: benchmarks.md
   - Roadmap: roadmap.md
-# Google Analytics
-google_analytics:
-  - "G-CRNY5PJKJH"
-  - auto
+
+
+# Data props
+
+home:
+  intro_section:
+    h1: Hello, Typeix!
+    description: Fast, unopinionated, minimalist framework for building efficient and scalable applications and libraries with typescript or javascript.
+  badges:
+    - title: EXTENSIBLE
+      description: Provides flexibility by allowing use core libraries in own projects.
+      icon: material/cogs
+    - title: VERSATILE
+      description: Adaptable ecosystem for all kinds of server-side applications or custom libraries.
+      icon: material/auto-fix
+    - title: LIGHTWEIGHT
+      description: "@typeix/resty is a minimal and flexible Node.js web application framework that provides a robust set of features."
+      icon: material/progress-wrench
+  live_preview:
+    h1: Live preview
+    description: See how your application may potentially look.

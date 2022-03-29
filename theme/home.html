@@ -5,7 +5,7 @@
     <div class="md-grid md-typeset">
         <div class="mdx-hero">
             <div class="mdx-hero__image">
-                <img src="/assets/coding.png" />
+                <img src="{{ 'assets/coding.png' | url }}" />
             </div>
             <div class="mdx-hero__content">
                 <h1>{{ config.home.intro_section.h1 }}</h1>
@@ -39,15 +39,31 @@
             <h1>{{ config.home.live_preview.h1 }}</h1>
             <p>{{ config.home.live_preview.description }}</p>
             <iframe src="https://codesandbox.io/embed/typeix-resty-starterkit-y6glj?fontsize=14&hidenavigation=1&theme=dark"
-                    style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
-                    title="Typeix Resty Starterkit"
-                    allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-                    sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-            ></iframe>
+               style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+               title="Typeix Resty Starterkit"
+               allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+               sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+             ></iframe>
         </div>
     </div>
 </section>
 {% endblock %}
+{% block content %}{% endblock %}
 {% block footer %}
-    {% include "partials/home-footer.html" %}
+{% import "partials/language.html" as lang with context %}
+<footer class="md-footer">
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        {% if config.copyright %}
+        <div class="md-footer-copyright__highlight">
+          {{ config.copyright }}
+        </div>
+        {% endif %}
+        {{ extracopyright }}
+      </div>
+      {% include "partials/social.html" %}
+    </div>
+  </div>
+</footer>
 {% endblock %}
