@@ -105,34 +105,32 @@ Inside source let's create orm-config.json file with following configuration:
 Inside datastore module let's create connection config file:
 
 ```ts
-import {CreateProvider, Injectable} from "@typeix/resty";
-import {Connection, createConnection, Logger, ObjectType, EntityManager, ConnectionOptions} from "typeorm";
-import {PgLoggerConfig} from "~/data-store/configs/pg.logger.config";
-import * as pgConfig from "~/orm-config.json";
-
 @Injectable()
-export class PgConfig {
+export class PgDataSource {
 
   @CreateProvider({
-    provide: Connection,
+    provide: DataSource,
     useFactory: async (logger: Logger) => {
-      return await createConnection(<ConnectionOptions>{
+      return await new DataSource(<DataSourceOptions>{
         ...pgConfig,
         name: "default",
         logging: process.env.NODE_ENV !== "prod",
         logger
-      });
+      }).initialize();
     },
-    providers: [PgLoggerConfig]
-  }) private connection: Connection;
+    providers: [PgDataSourceLogger, Injector]
+  }) private dataSource: DataSource;
 
-
-  getEntityManager(): EntityManager {
-    return this.connection.manager;
+  getDataSource(): DataSource {
+    return this.dataSource;
   }
 
-  getCustomRepository<T>(entity: ObjectType<T>): T {
-    return this.connection.getCustomRepository(entity);
+  getEntityManager(): EntityManager {
+    return this.dataSource.manager;
+  }
+
+  getRepository<T>(entity: EntityTarget<T>): Repository<T> {
+    return this.dataSource.manager.getRepository(entity);
   }
 }
 ```
@@ -169,41 +167,65 @@ export class User {
 }
 ```
 
-## Repository
+## Repository and Services
 Repository is just like EntityManager but its operations are limited to a concrete entity.
 
-In following example you can see implementation of UserRepository
+In following example you can see implementation of UserRepository by creating a UserService
 ```ts
-import {Injectable} from "@typeix/resty";
-import {User} from "~/data-store/entity/user.entity";
-import {EntityRepository, Repository} from "typeorm";
-
 @Injectable()
-@EntityRepository(User)
-export class UserRepository extends Repository<User> {
+export class UserService {
 
+  @Inject() pgDataSource: PgDataSource;
+
+  async find(): Promise<Array<User>> {
+    return this.getRepository().find();
+  }
+
+  async save(entity: User): Promise<User> {
+    return this.getRepository().save(entity);
+  }
+
+  getRepository(): Repository<User> {
+    return this.pgDataSource.getRepository(User);
+  }
 }
 ```
-
-TypeORM and Resty needs to be aware about custom repositories, so we initialize them in modules:
+In service we implement custom business logic or extend repository, each repository contains default logic
 ```ts
-import {Module} from "@typeix/resty";
-import {PgConfig} from "~/data-store/configs/pg.config";
-import {UserRepository} from "~/data-store/repository/user.repository";
-
-@Module({
-  providers: [
-    PgConfig,
-    {
-      provide: UserRepository,
-      useFactory: config => config.getCustomRepository(UserRepository),
-      providers: [PgConfig]
-    }
-  ],
-  exports: [UserRepository, PgConfig]
-})
-export class PgModule {
-
+declare class Repository<Entity extends ObjectLiteral> {
+    get metadata(): import("..").EntityMetadata;
+    createQueryBuilder(alias?: string, queryRunner?: QueryRunner): SelectQueryBuilder<Entity>;
+    hasId(entity: Entity): boolean;
+    getId(entity: Entity): any;
+    create(entityLike: DeepPartial<Entity>): Entity;
+    merge(mergeIntoEntity: Entity, ...entityLikes: DeepPartial<Entity>[]): Entity;
+    preload(entityLike: DeepPartial<Entity>): Promise<Entity | undefined>;
+    save<T extends DeepPartial<Entity>>(entity: T, options?: SaveOptions): Promise<T & Entity>;
+    remove(entity: Entity, options?: RemoveOptions): Promise<Entity>;
+    softRemove<T extends DeepPartial<Entity>>(entity: T, options?: SaveOptions): Promise<T & Entity>;
+    recover<T extends DeepPartial<Entity>>(entity: T, options?: SaveOptions): Promise<T & Entity>;
+    insert(entity: QueryDeepPartialEntity<Entity> | QueryDeepPartialEntity<Entity>[]): Promise<InsertResult>;
+    update(criteria: string | string[] | number | number[] | Date | Date[] | ObjectID | ObjectID[] | FindOptionsWhere<Entity>, partialEntity: QueryDeepPartialEntity<Entity>): Promise<UpdateResult>;
+    upsert(entityOrEntities: QueryDeepPartialEntity<Entity> | QueryDeepPartialEntity<Entity>[], conflictPathsOrOptions: string[] | UpsertOptions<Entity>): Promise<InsertResult>;
+    delete(criteria: string | string[] | number | number[] | Date | Date[] | ObjectID | ObjectID[] | FindOptionsWhere<Entity>): Promise<DeleteResult>;
+    softDelete(criteria: string | string[] | number | number[] | Date | Date[] | ObjectID | ObjectID[] | FindOptionsWhere<Entity>): Promise<UpdateResult>;
+    restore(criteria: string | string[] | number | number[] | Date | Date[] | ObjectID | ObjectID[] | FindOptionsWhere<Entity>): Promise<UpdateResult>;
+    count(options?: FindManyOptions<Entity>): Promise<number>;
+    countBy(where: FindOptionsWhere<Entity> | FindOptionsWhere<Entity>[]): Promise<number>;
+    find(options?: FindManyOptions<Entity>): Promise<Entity[]>;
+    findBy(where: FindOptionsWhere<Entity> | FindOptionsWhere<Entity>[]): Promise<Entity[]>;
+    findAndCount(options?: FindManyOptions<Entity>): Promise<[Entity[], number]>;
+    findAndCountBy(where: FindOptionsWhere<Entity> | FindOptionsWhere<Entity>[]): Promise<[Entity[], number]>;
+    findByIds(ids: any[]): Promise<Entity[]>;
+    findOne(options: FindOneOptions<Entity>): Promise<Entity | null>;
+    findOneBy(where: FindOptionsWhere<Entity> | FindOptionsWhere<Entity>[]): Promise<Entity | null>;
+    findOneById(id: number | string | Date | ObjectID): Promise<Entity | null>;
+    findOneOrFail(options: FindOneOptions<Entity>): Promise<Entity>;
+    findOneByOrFail(where: FindOptionsWhere<Entity> | FindOptionsWhere<Entity>[]): Promise<Entity>;
+    query(query: string, parameters?: any[]): Promise<any>;
+    increment(conditions: FindOptionsWhere<Entity>, propertyPath: string, value: number | string): Promise<UpdateResult>;
+    decrement(conditions: FindOptionsWhere<Entity>, propertyPath: string, value: number | string): Promise<UpdateResult>;
+    extend<CustomRepository>(custom: CustomRepository & ThisType<Repository<Entity> & CustomRepository>): Repository<Entity> & CustomRepository;
 }
 ```
 
@@ -221,24 +243,25 @@ import {
   InterceptedRequest,
   RequestInterceptor
 } from "@typeix/resty";
-import {PgConfig} from "~/modules/datastore/configs/pg.config";
+import {PgDataSource} from "~/modules/data-store/configs/pgdatasource.config";
 import {Repository} from "typeorm";
 
 
 @Injectable()
 class TransactionalInterceptor implements RequestInterceptor {
 
+
   @Inject() injector: Injector;
-  @Inject() config: PgConfig;
+  @Inject() config: PgDataSource;
 
   async invoke(request: InterceptedRequest): Promise<any> {
-    const queryRunner = this.config.getConnection().createQueryRunner();
+    const queryRunner = this.config.getDataSource().createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction("READ COMMITTED");
     try {
       const type = request.args.type;
-      const repository: Repository<typeof type> = await queryRunner.manager.getCustomRepository(type);
-      this.injector.set(type, repository);
+      const repository: Repository<typeof type> = await queryRunner.manager.getRepository(type);
+      this.injector.set(Repository, repository);
       await request.handler();
       await queryRunner.commitTransaction();
     } catch (err) {
@@ -270,11 +293,10 @@ As we can see below in controller we inject transactional UserRepository which i
 export class AppController {
 
   @Inject() appService: AppService;
-  @Inject() userRepository: UserRepository;
 
   @POST("users")
-  @Transactional(UserRepository)
-  createUser(@Inject() repository: UserRepository) { // repository is injected by transaction interceptor!
+  @Transactional(User)
+  createUser(@Inject() repository: Repository<User>) {
     const user = new User();
     user.age = 100;
     user.firstName = "Igor";
@@ -371,14 +393,5 @@ export class PgLoggerConfig implements TypeOrmLogger {
 }
 ```
 
-## Services
-TBD...
-
-NOTE:
-> Name services should be done using verbs instead of nouns! <br />
-> There is no “user domain” and there should also be no “UserService”.  <br />
-> Instead, we can have “UserRegistrationService” or “UserAuthenticationService”. <br />
-
-By naming our service by the primary business action or process we also make it clear what is the behavior we want it to implement.
 
 

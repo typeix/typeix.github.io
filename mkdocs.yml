@@ -48,7 +48,7 @@ theme:
   features:
     - navigation.sections
     - navigation.tabs
-    - navigation.tabs.sticky
+#    - navigation.tabs.sticky
   palette:
     - scheme: slate
       primary: red
