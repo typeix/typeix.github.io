@@ -46,7 +46,7 @@ theme:
 plugins:
   - search
   - minify:
-      minify_html: false
+      minify_html: true
       htmlmin_opts:
         remove_optional_attribute_quotes: false
 
