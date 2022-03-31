@@ -146,8 +146,9 @@ To add database columns, you simply need to decorate an entity's properties you 
 a `@Column` decorator.
 
 Let's create our first User Entity:
+
 ```ts
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, PrimaryGeneratedColumn} from "";
 
 @Entity()
 export class User {

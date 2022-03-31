@@ -85,7 +85,7 @@ Inside datastore module let's create connection config file:
 
 ```ts
 import {CreateProvider, Injectable} from "@typeix/resty";
-import {DataSource, DataSourceOptions, MongoEntityManager} from "typeorm";
+import {DataSource, DataSourceOptions, MongoEntityManager} from "";
 import * as pgConfig from "~/orm-config.json";
 import {EntityTarget} from "typeorm/common/EntityTarget";
 import {MongoRepository} from "typeorm/repository/MongoRepository";
