@@ -36,22 +36,24 @@ You can find full example
 in [resty starters repository](https://github.com/typeix/resty-starters/tree/master/graphql-typeorm-sql){:target="_blank"}.
 
 ## Resty with Graphql
-Goal is to generate following structure
+Goal is to generate following structure:
 ```text
 src
  L controllers
     L rest
+        L test
+            L user.controller.integration-spec.ts
+            L permission.controller.integration-spec.ts
         L permission.controller.ts
-        L permission.controller.integration-spec.ts
         L user.controller.ts
-        L user.controller.integration-spec.ts
     L graphql
+        L test
+            L permission.resolver.integration-spec.ts
+            L user.resolver.integration-spec.ts
+        L graphql.config.ts
+        L graphql.controller.ts
         L user.resolver.ts
-        L user.resolver.integration-spec.ts
         L permission.resolver.ts
-        L permission.resolver.integration-spec.ts
-    L graphql.config.ts
-    L graphql.controller.ts
  L services
     L user.service.ts
     L permission.service.ts
@@ -59,5 +61,90 @@ src
  L bootstrap.ts
 ```
 
+
+## Schema config
+In following example graphql.config.ts we need to use type-graphql to build schema, schema can be generated from code or from
+schema .gql file using graphql syntax.
+````ts
+import {CreateProvider, Injectable, RouterError} from "@typeix/resty";
+import {buildSchema} from "type-graphql";
+import {GraphQLSchema} from "graphql";
+import {UserResolver} from "~/controllers/graphql/user.resolver";
+import {PermissionResolver} from "~/controllers/graphql/permission.resolver";
+
+@Injectable()
+export class GraphQLConfig {
+
+  @CreateProvider({
+    provide: "GraphqlConfigSchema",
+    useFactory: async () => {
+      return await buildSchema({
+        resolvers: [UserResolver, PermissionResolver],
+        container: ({context}) => context.container
+      });
+    },
+    providers: []
+  })
+  private schema: GraphQLSchema;
+
+  public getSchema(): GraphQLSchema {
+    return this.schema;
+  }
+
+  public parseBody(body: Buffer): any {
+    try {
+      return JSON.parse(body.toString());
+    } catch (e) {
+      throw new RouterError("GraphQL syntax error, cannot parse json request", 400);
+    }
+  }
+}
+
+````
+## Controller
+In order for GraphQL to process request it needs to have only one REST endpoint which accepts request body as json which contains
+ query operation name and variables, query can contain graphql query and mutations.
+````ts
+import {addRequestInterceptor, BodyAsBufferInterceptor, Controller, Inject, Injector, POST, RouterError} from "@typeix/resty";
+import {PermissionResolver} from "~/controllers/graphql/permission.resolver";
+import {UserResolver} from "~/controllers/graphql/user.resolver";
+import {GraphQLConfig} from "~/controllers/graphql/graphql.config";
+import {graphql, parse, Source, specifiedRules, validate} from "graphql";
+
+@Controller({
+  path: "/graphql",
+  providers: [PermissionResolver, UserResolver],
+  interceptors: []
+})
+export class GraphQLController {
+
+  @Inject() graphQlConfig: GraphQLConfig;
+  @Inject() injector: Injector;
+
+  @POST()
+  @addRequestInterceptor(BodyAsBufferInterceptor)
+  processGraphQL(@Inject() body: Buffer) {
+    let schema = this.graphQlConfig.getSchema();
+    let {query, operationName, variables} = this.graphQlConfig.parseBody(body);
+    let source = new Source(query, operationName);
+    let documentAST = parse(source);
+    let validationErrors = validate(schema, documentAST, specifiedRules);
+    if (validationErrors.length > 0) {
+      throw new RouterError("GraphQL validation error.", 400, validationErrors);
+    }
+    return graphql(
+      schema,
+      source,
+      null,
+      {
+        container: this.injector
+      },
+      variables,
+      operationName
+    );
+  }
+}
+````
+## Repositories
 
 TBD...
