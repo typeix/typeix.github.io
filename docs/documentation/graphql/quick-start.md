@@ -33,7 +33,7 @@ one you should follow if you adopt code first, and the other to be used if you a
 
 Resty fully supports integration with type-graphql without any extra library or adapter.
 You can find full example
-in [resty starters repository](https://github.com/typeix/resty-starters/tree/master/graphql-typeorm-sql){:target="_blank"}.
+in [resty starters repository](https://github.com/typeix/resty-starters/tree/master/ts-graphql){:target="_blank"}.
 
 ## Resty with Graphql
 Goal is to generate following structure:
