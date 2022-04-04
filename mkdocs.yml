@@ -60,6 +60,13 @@ plugins:
         "documentation/type-orm.md": "documentation/typeorm/rdbms.md"
         "documentation/type-orm-mongo.md": "documentation/typeorm/mongodb.md"
         "documentation/model-view-controller.md": "documentation/fundamentals/model-view-controller.md"
+        "packages/typeix-resty.md": "packages/resty.md"
+        "packages/typeix-resty-aws-lambda.md": "packages/resty/aws-lambda-integration.md"
+        "packages/typeix-di.md": "packages/di.md"
+        "packages/typeix-logger.md": "packages/logger.md"
+        "packages/typeix-metadata.md": "packages/metadata.md"
+        "packages/typeix-modules.md": "packages/modules.md"
+        "packages/typeix-router.md": "packages/router.md"
 
 # Customization
 extra:
@@ -142,12 +149,13 @@ nav:
           - Quck Start: documentation/graphql/quick-start.md
 
       - Node Packages:
-          - "@typeix/resty": packages/resty/typeix-resty.md
-          - "@typeix/metadata": packages/typeix-metadata.md
-          - "@typeix/di": packages/typeix-di.md
-          - "@typeix/modules": packages/typeix-modules.md
-          - "@typeix/router": packages/typeix-router.md
-          - "@typeix/logger": packages/typeix-logger.md
+          - "@typeix/resty": packages/resty.md
+          - "@typeix/resty-aws-lambda": packages/resty/aws-lambda-integration.md
+          - "@typeix/metadata": packages/metadata.md
+          - "@typeix/di": packages/di.md
+          - "@typeix/modules": packages/modules.md
+          - "@typeix/router": packages/router.md
+          - "@typeix/logger": packages/logger.md
 
 
           # - AWS Lambda Adapter: packages/resty/typeix-resty-aws-lambda.md
