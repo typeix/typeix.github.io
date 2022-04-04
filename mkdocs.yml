@@ -54,6 +54,8 @@ plugins:
         "getting-started.md": "documentation/getting-started.md"
         "documentation/testing.md": "documentation/rest/testing/index.md"
         "documentation/controllers.md": "documentation/rest/controllers.md"
+        "documentation/modules.md": "documentation/rest/modules.md"
+        "documentation/providers.md": "documentation/rest/providers.md"
         "documentation/interceptors.md": "documentation/rest/interceptors.md"
         "documentation/type-orm.md": "documentation/typeorm/rdbms.md"
         "documentation/type-orm-mongo.md": "documentation/typeorm/mongodb.md"
