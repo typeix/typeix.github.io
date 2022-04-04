@@ -49,6 +49,11 @@ plugins:
       minify_html: true
       htmlmin_opts:
         remove_optional_attribute_quotes: false
+  - redirects:
+      redirect_maps:
+        "getting-started.md": "documentation/getting-started.md"
+        "documentation/testing.md": "documentation/rest/testing/index.md"
+        "documentation/controllers.md": "documentation/rest/controllers.md"
 
 # Customization
 extra:
