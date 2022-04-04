@@ -54,6 +54,10 @@ plugins:
         "getting-started.md": "documentation/getting-started.md"
         "documentation/testing.md": "documentation/rest/testing/index.md"
         "documentation/controllers.md": "documentation/rest/controllers.md"
+        "documentation/interceptors.md": "documentation/rest/interceptors.md"
+        "documentation/type-orm.md": "documentation/typeorm/rdbms.md"
+        "documentation/type-orm-mongo.md": "documentation/typeorm/mongodb.md"
+        "documentation/model-view-controller.md": "documentation/fundamentals/model-view-controller.md"
 
 # Customization
 extra:
