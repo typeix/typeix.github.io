@@ -73,7 +73,7 @@ plugins:
 extra:
   analytics:
     provider: google
-    property: "GTM-P29PLQ2" # "G-CRNY5PJKJH"
+    property: "G-CRNY5PJKJH" # "G-CRNY5PJKJH"
   twitter: typeixframework
   social:
     - icon: fontawesome/brands/github
