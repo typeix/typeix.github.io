@@ -1,8 +1,9 @@
 ---
-template: main.html title: GraphQL Quick Start
+template: main.html 
+title: GraphQL - Quick Start
 ---
 
-# Getting started
+# Quick Start
 
 [GraphQL](https://graphql.org/){:target="_blank"}  is a query language for APIs and a runtime for fulfilling those
 queries with your existing data. GraphQL combined with [TypeScript](https://www.typescriptlang.org/){:target="_blank"}

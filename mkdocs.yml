@@ -148,6 +148,13 @@ nav:
 
       - GraphQL:
           - Quck Start: documentation/graphql/quick-start.md
+          - Types and Fields: documentation/graphql/types-and-fields.md
+          - Resolvers: documentation/graphql/resolvers.md
+          # - Mutations: documentation/graphql/mutations.md
+          # - Directives: documentation/graphql/directives.md
+          # - Scalars: documentation/graphql/scalars.md
+          # - Subscriptions: documentation/graphql/subscriptions.md
+          # - Unions and Enums: documentation/graphql/unions-and-enums.md
 
       - Node Packages:
           - "@typeix/resty": packages/resty.md
