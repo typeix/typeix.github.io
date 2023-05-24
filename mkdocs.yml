@@ -155,7 +155,8 @@ nav:
           # - Scalars: documentation/graphql/scalars.md
           # - Subscriptions: documentation/graphql/subscriptions.md
           # - Unions and Enums: documentation/graphql/unions-and-enums.md
-
+      - WebSockets:
+          - Quck Start: documentation/websockets/websocket.md
       - Node Packages:
           - "@typeix/resty": packages/resty.md
           - "@typeix/resty-aws-lambda": packages/resty/aws-lambda-integration.md
