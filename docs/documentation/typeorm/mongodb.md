@@ -4,7 +4,21 @@ title: MongoDB with TypeORM integration
 ---
 
 # Mongodb
-MongoDB is a general purpose, document-based, distributed database built for modern application developers and for the cloud era.
+
+MongoDB is a popular, open-source, NoSQL (non-relational) database management system designed to handle large volumes 
+of unstructured or semi-structured data. Developed by MongoDB Inc., it falls under the category of document-oriented databases.
+
+Unlike traditional relational databases, which organize data into tables with predefined schemas, 
+MongoDB stores data in flexible, JSON-like documents. This allows for dynamic and 
+schema-less data modeling, making it well-suited for applications where data structures can evolve over time.
+
+One of MongoDB's key strengths lies in its ability to scale horizontally, which means 
+it can distribute data across multiple servers to handle high traffic and large datasets. 
+It also supports features like replication for high availability and sharding for even greater scalability.
+
+MongoDB is widely used across various industries, including web applications, mobile apps, 
+IoT (Internet of Things) devices, and more. Its flexibility, scalability, and ease of use have made it a 
+popular choice for developers seeking to work with large and rapidly evolving datasets.
 
 TypeORM has basic MongoDB support, find out more by reading [official docs](https://typeorm.io/#/mongodb).
 

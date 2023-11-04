@@ -2,8 +2,58 @@
 template: main.html 
 title: SQL with TypeORM integration
 ---
+# Relational Databases (RDBMS)
+Relational databases are a type of database management system (DBMS) that organize and store data in tables, 
+which are structured collections of rows and columns. They follow the principles of the relational model, as proposed by Edgar Codd in the 1970s.
 
-# TypeORM
+Here are some key characteristics and concepts associated with relational databases:
+
+**Tables**: 
+Data is organized into tables, where each table represents a specific entity or concept. 
+For example, a database for a library might have tables for books, authors, and borrowers.
+
+**Rows and Columns**: 
+Each table consists of rows (also known as records or tuples) and columns (also known as attributes). 
+Rows represent individual instances of data, while columns define the attributes or properties of those instances.
+
+**Primary Keys**: 
+A primary key is a unique identifier for each row in a table. 
+It ensures that every record can be uniquely identified, which is crucial for data integrity.
+
+**Relationships**: 
+Relational databases allow for the establishment of relationships between tables. 
+For example, in a library database, a book can be associated with an author through a relationship.
+
+**Normalization**: 
+This is the process of organizing the data in a database to minimize redundancy and dependency. 
+It helps to maintain data integrity and optimize storage.
+
+**Structured Query Language (SQL)**: 
+SQL is a domain-specific language used to interact with relational databases. 
+It allows users to perform operations like querying, inserting, updating, and deleting data.
+
+**ACID Properties**: 
+Relational databases adhere to ACID properties - Atomicity, Consistency, Isolation, and Durability. 
+These properties ensure that database transactions are reliably processed.
+
+**Transactions**: 
+A transaction is a unit of work that involves one or more operations on the database. 
+It either completes in full or is rolled back entirely in case of an error.
+
+**Integrity Constraints**: 
+These are rules that help maintain data accuracy and consistency. 
+Examples include foreign key constraints, which enforce relationships between tables.
+
+**Data Integrity**: 
+Relational databases are designed to enforce data integrity through various mechanisms 
+like primary keys, foreign keys, and constraints.
+
+Relational databases are widely used in various industries and applications, including business management 
+systems, e-commerce platforms, financial systems, and more. Popular examples of relational database management systems
+(RDBMS) include MySQL, PostgreSQL, Oracle Database, Microsoft SQL Server, and SQLite. 
+They provide a robust framework for organizing, querying, and managing structured data.
+
+## TypeORM
 
 Object–relational mapping (ORM, O/RM, and O/R mapping tool) in computer science 
 is a programming technique for converting data between incompatible type systems 
