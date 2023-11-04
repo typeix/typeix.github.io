@@ -3,8 +3,27 @@ template: main.html
 title: Model View Controller
 ---
 # Model View Controller
-Model–view–controller is a software design pattern commonly used for developing user interfaces 
-that divides the related program logic into three interconnected elements. <br />
+The Model-View-Controller (MVC) is a widely used software architecture pattern that separates
+the concerns of an application into three main components: the Model, the View, and the Controller.
+This pattern aims to enhance the maintainability, scalability, and flexibility of software systems.
+
+Model (M): The Model represents the data and business logic of the application. 
+It encapsulates the data structures, database interactions, and algorithms that handle the application's core functionality.
+The Model is independent of the user interface and can be modified without affecting the other components.
+
+View (V): The View is responsible for presenting the user interface to the end-users. 
+It renders the data from the Model and displays it in a format that is understandable and accessible to the user.
+Views can include graphical user interfaces, command-line interfaces, web pages, or any other presentation medium.
+
+Controller (C): The Controller acts as an intermediary between the Model and the View.
+It receives input from the user (e.g., through a GUI or a web page), processes it, and triggers the necessary actions in the Model.
+The Controller also updates the View to reflect any changes in the Model's state.
+
+By separating the application into these three components, the MVC pattern promotes modularity, making it easier to
+develop, test, and maintain software systems. Additionally, it allows for parallel development, as different teams can
+work on different components independently. This pattern is widely used in various software development frameworks and
+is a fundamental concept in building robust and scalable applications.
+
 
 ![Model View Controller](/assets/mvc.png)
 
