@@ -133,6 +133,7 @@ nav:
           - Model View Controller: documentation/fundamentals/model-view-controller.md
 
       - Resty:
+          - Quick Start: documentation/rest/quick-start.md
           - Modules: documentation/rest/modules.md
           - Providers: documentation/rest/providers.md
           - Interceptors: documentation/rest/interceptors.md
@@ -147,7 +148,7 @@ nav:
           - Mongodb: documentation/typeorm/mongodb.md
 
       - GraphQL:
-          - Quck Start: documentation/graphql/quick-start.md
+          - Quick Start: documentation/graphql/quick-start.md
           - Types and Fields: documentation/graphql/types-and-fields.md
           - Resolvers: documentation/graphql/resolvers.md
           # - Mutations: documentation/graphql/mutations.md
@@ -156,7 +157,7 @@ nav:
           # - Subscriptions: documentation/graphql/subscriptions.md
           # - Unions and Enums: documentation/graphql/unions-and-enums.md
       - WebSockets:
-          - Quck Start: documentation/websockets/websocket.md
+          - Quick Start: documentation/websockets/websocket.md
       - Node Packages:
           - "@typeix/resty": packages/resty.md
           - "@typeix/resty-aws-lambda": packages/resty/aws-lambda-integration.md

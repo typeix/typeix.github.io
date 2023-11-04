@@ -2,10 +2,45 @@
 template: main.html
 title: Using websockets over http or https server
 ---
+# Websockets
+WebSockets provide a communication protocol that allows for real-time, bidirectional communication between 
+a client (usually a web browser) and a server over a single, long-lived connection. 
+Unlike traditional HTTP requests, which are stateless and require separate requests for each interaction, 
+WebSockets enable continuous data exchange between the client and server.
 
-# Quick Start
-WebSocket is a computer communications protocol, providing full-duplex communication channels over a single TCP connection.
-The WebSocket protocol was standardized by the IETF as RFC 6455 in 2011. 
+**Key characteristics of WebSockets include:**
+
+**Bi-Directional Communication:** 
+WebSockets allow both the client and server to send messages to each other at any time, enabling real-time updates and interactive applications.
+
+**Persistent Connection:** 
+Once established, a WebSocket connection remains open, allowing for efficient and instant data transfer 
+without the overhead of repeatedly establishing new connections.
+
+**Low Latency:** 
+Since WebSockets eliminate the need for repeated request-response cycles, they provide low-latency communication, 
+making them ideal for applications that require rapid updates.
+
+**Efficient Use of Resources:** 
+WebSockets reduce the need for continuous polling or long-polling techniques, which can be resource-intensive for both the client and server.
+
+**Support for Various Data Formats:** 
+WebSockets can transmit data in various formats, including plain text, JSON, XML, and binary data, giving developers flexibility
+in designing their communication protocols.
+
+**Cross-Domain Communication:** 
+WebSockets can facilitate communication between different domains, provided that the server supports cross-origin resource sharing (CORS) 
+or other necessary security measures.
+
+WebSockets find applications in a wide range of real-time or interactive scenarios, such as chat applications, online gaming, 
+collaborative editing tools, financial trading platforms, and live sports updates.
+
+It's worth noting that while WebSockets offer significant advantages for real-time communication, they may not be the best choice for all situations. 
+Factors like security considerations, compatibility with existing systems, and the nature of the application's requirements 
+should be taken into account when deciding whether to implement WebSockets.
+
+## Quick Start
+
 Typeix resty websocket implementation is a wrapper over [ws](https://www.npmjs.com/package/ws){:target="_blank"} node.js package.
 
 Resty fully supports integration with ws using `@typeix/resty-ws` wrapper library.
