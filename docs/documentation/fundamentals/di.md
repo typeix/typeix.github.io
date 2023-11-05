@@ -3,10 +3,46 @@ template: main.html
 title: Dependency Injection for Typescript projects
 ---
 # Dependency Injection
-Dependency Injection (DI) is a design pattern used to implement IoC. It allows the creation of dependent objects outside
-of a class and provides those objects to a class through different ways. Using DI, we move the creation and binding of
-the dependent objects outside of the class that depends on them, typeix uses decorator pattern to implement 
-dependency injection. 
+Dependency Injection (DI) is a design pattern used in software development to promote loose coupling and 
+improve the maintainability, testability, and scalability of applications. It's a technique where a component's dependencies 
+(i.e., the objects or services it relies on) are provided to it from an external source, rather than being created within the component itself.
+
+**Here are key concepts of Dependency Injection:**
+
+**Inversion of Control (IoC):** 
+DI is a specific implementation of the more general IoC principle. In IoC, the control over the instantiation and 
+management of dependencies is inverted or "inverted" from the component itself to an external entity (often a container or framework).
+
+**Components and Dependencies:** 
+In a software system, components are pieces of code or classes that perform specific functions. 
+Dependencies are the objects, services, or resources that a component needs to accomplish its tasks.
+
+
+**Dependency Injection Container (DIC):** 
+A DIC is a framework or container that manages the instantiation and wiring of components and their dependencies. 
+It simplifies the process of configuring and injecting dependencies, reducing the manual effort required.
+
+**Benefits of DI:**
+
+**Testability:** 
+DI makes it easier to write unit tests for components because dependencies can be replaced with mock or stub objects for testing purposes.
+
+**Flexibility:** 
+It allows for easy swapping of implementations or configurations without modifying the component's code.
+
+**Maintainability:** 
+DI promotes cleaner, more modular code by explicitly defining dependencies and their relationships.
+
+**Reduced Coupling:** 
+Components are not tightly bound to specific implementations of their dependencies, making it easier to change or extend functionality.
+
+**Drawbacks of DI:**
+
+**Learning Curve:** 
+Implementing DI may require developers to understand and adopt new patterns and practices.
+
+**Potential Complexity:** 
+In large applications, managing a large number of dependencies and their configurations can become complex without the use of a DI container.
 
 In object-oriented programming, the decorator pattern is a design pattern that allows behavior 
 to be added to an individual object, dynamically, without affecting the behavior of other objects from the same class.
