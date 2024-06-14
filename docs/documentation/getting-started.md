@@ -47,7 +47,7 @@ Typeix is fully compatible to develop application in javascript with babel compi
 ```shell
 $ typeix new project-name -l js
 $ cd project-name
-$ typeix start --watch
+$ npm run start:dev
 ```
 The project directory will be created, and in src you can find boilerplate javascript files!
 
